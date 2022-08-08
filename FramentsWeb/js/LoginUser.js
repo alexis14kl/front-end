@@ -3,7 +3,25 @@
 		var validLogin = $('#validLogin').val();
 		var passLogin = $('#passLogin').val();
 		if(emailLogin.trim() === ''){
-			alert("email obligatorio");
+			Swal.fire(
+      {
+      html: '<p style="color:red;">Correo obligatorio <i class="fa fa-envelope" aria-hidden="true"></i></p>',
+      backdrop: true,
+      maxlength: 1,
+      toast: true,//alert mas peque
+      popup: 'swal2-show',
+  backdrop: 'swal2-backdrop-show',
+  icon: 'swal2-icon-show',
+  confirmButton: false,
+  cancelButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+      position: 'top-end',didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }}
+      );
 		}else if(passLogin.trim() === ''){
 			alert("pass obligatoria");
 		}else if(validLogin.trim() === ''){

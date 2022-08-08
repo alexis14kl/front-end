@@ -194,17 +194,42 @@ img#imgslider {
 <script>
 $(document).ready(function(){
 	if(navigator.onLine) {
-		alert("conectado a internet");
+		// alert("conectado a internet");
+		Swal.fire(
+			{
+			html: '<p style="color:red;">conectado a internet<i class="fa fa-times"></i></p>',
+			backdrop: true,
+			maxlength: 1,
+			toast: true,//alert mas peque
+			popup: 'swal2-show',
+  backdrop: 'swal2-backdrop-show',
+  icon: 'swal2-icon-show',
+  confirmButton: false,
+  cancelButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+			position: 'top-end',didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }}
+			);
+
     // el navegador está conectado a la red
 } else {
 	alert("no hay internet");
     // el navegador NO está conectado a la red
 }
 })
-
-
-
 </script>
-
+<style>
+	.swal2-popup{
+		background-color: black !important;
+		color: red;
+		max-height: 40%;
+	}
+</style>
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </html>
 
