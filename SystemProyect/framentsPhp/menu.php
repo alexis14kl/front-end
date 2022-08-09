@@ -36,7 +36,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="full">
-                        <a class="logo" href="index.html"><img src="logo.png" alt="#" /></a>
+                        <a style="font-size: 35pt;" class="logo" href="index.html"><p style="color: red;" id="ventaAgregada"></p> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+<!-- <img src="logo.png" alt="#" /> --></a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -59,4 +60,3 @@
             </div>
         </div>
     </header>
-

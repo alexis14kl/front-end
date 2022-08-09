@@ -207,11 +207,11 @@ require("../php/Conexion.php");
         </label>
         <button onclick="mas();" class="bees-button qty-button-plus is-round is-secondary" type="button"><span>+</span></button>
     </div>
-      
+      <input id="idProductoTemp" type="text" value="hola" name="">
       <!-- end element input cantidad -->
       <div class="buttons">
          <a href="#" class="buy">Cancelar</a>
-         <a href="#" class="cart">Comprar</a>
+         <a class="cart" onclick="Agregar();">Agregar</a>
       </div>
    </div>
 </div>
@@ -325,6 +325,7 @@ require("../php/Conexion.php");
                     $('#Nombre_Producto_Modal').html(dataPhp.Nombre_Producto);
                      $('#Imagen_Producto_Modal').html("<img src="+dataPhp.Imagen_Producto+" alt='hola mundo'>");
                      $('.price').html(dataPhp.Precio_producto);
+                     $('#idProductoTemp').val(dataPhp.Id_Producto);
                  }
                 );
         }
@@ -346,6 +347,22 @@ require("../php/Conexion.php");
             }
 
         }
+
+
+function Agregar(){
+    var result = $('#result').val();
+    var idProductoTemp = $('#idProductoTemp').val();
+    $.post(
+        'framentsPhp/AgregarProductoTemp.php',
+        {result:result,
+            idProductoTemp:idProductoTemp},
+        function(agregar){
+            var ventaAgregada = $('#ventaAgregada').html("+");
+            alert("Producto Agregado");
+        }
+        );
+}
+
     </script>
     <style>
           .bees-product-qty {
