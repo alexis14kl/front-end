@@ -197,8 +197,18 @@ require("../php/Conexion.php");
          <i class="fa fa-star-half-alt"></i>
          <span>( 250 )</span>
       </div>
-      <p><input type="" name=""></p>
       <div class="price">precio</div>
+       <!-- elemento input cantidad -->
+      <div class="bees-product-qty">
+        <button onclick="menos();" class="bees-button qty-button-minus is-round is-secondary" type="button"><span>-</span></button>
+        <label>
+            <span class="visually-hidden"> </span>
+            <input id="result" name="quantity" class="requested-qty" type="text" min="0" max="9999" value="">
+        </label>
+        <button onclick="mas();" class="bees-button qty-button-plus is-round is-secondary" type="button"><span>+</span></button>
+    </div>
+      
+      <!-- end element input cantidad -->
       <div class="buttons">
          <a href="#" class="buy">Cancelar</a>
          <a href="#" class="cart">Comprar</a>
@@ -307,7 +317,6 @@ require("../php/Conexion.php");
 
 
         function comprar(id){
-
             $.post(
                 'framentsPhp/ConsultarProductoXID.php',
                 {id:id},
@@ -319,4 +328,91 @@ require("../php/Conexion.php");
                  }
                 );
         }
+
+        function menos(){
+            let result = $('#result').val();
+            if(result > 0 ){
+                result--;
+                $('#result').val(result);
+            }
+            
+        }
+
+        function mas(){
+            let  result = $('#result').val();
+            if(result < 9999999999999){
+                result++;
+                $('#result').val(result);
+            }
+
+        }
     </script>
+    <style>
+          .bees-product-qty {
+    /*display: flex;*/
+    height: 32px;
+}
+.bees-product-card .bees-button {
+    outline: none;
+}
+.bees-button.is-secondary, .bees-button.is-tertiary {
+    background-color: #fff;
+    color: #000;
+    border-color: #000;
+}
+.bees-button.is-round {
+    border-radius: 100%;
+    width: 36px;
+    padding: 6px;
+}
+.bees-product-qty button {
+    border-width: thin;
+    display: inline-block;
+    height: 32px!important;
+    width: 32px!important;
+}
+.bees-button {
+    -webkit-appearance: none;
+    align-items: center;
+    background-color: #000;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-family: var(--default-font),"Verdana","Arial",sans-serif;
+    font-weight: 500;
+    letter-spacing: normal;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    word-spacing: 0;
+    height: 36px;
+    font-size: 16px;
+    padding: 8px 16px;
+    line-height: 16px;
+    text-transform: lowercase!important;
+}
+.bees-product-card .requested-qty {
+    border-radius: 4px;
+    border: 1px solid #b9bcc1;
+    font-weight: 500;
+    outline: none;
+    width: 40px;
+}
+.bees-product-qty input {
+    border: thin solid #b9bcc1;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 8px;
+    padding: 0;
+    text-align: center;
+    width: 43px;
+    height: 32px;
+}
+user agent stylesheet
+input[type="text" i] {
+    padding: 1px 2px;
+}
+      </style>
