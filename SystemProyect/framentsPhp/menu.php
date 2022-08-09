@@ -13,7 +13,7 @@
                         <a href="index.html">Home</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="about.html">Mis Pedidos</a>
                     </li>
                     <li>
                         <a href="recipe.html">Recipe</a>

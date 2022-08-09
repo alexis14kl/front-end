@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+require("../php/Conexion.php");
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +88,7 @@
                                         </div>
                                         <div class="col-md-7">
                                             <div class="slider_image full text_align_center">
-                                                <img class="img-responsive" src="images/corona.png" alt="#" />
+                                                <img class="img-responsive" src="images/carta.png" alt="#" />
                                             </div>
                                         </div>
                                     </div>
@@ -150,42 +152,43 @@
     height: 20rem!important;
 }
     </style>
+    <!-- *************products gallery -->
     <div class="row">
         <div class="col-md-12">
-                       <div class="container">
-
-   <h3 style="color: white;" class="title"> organic products </h3>
-<!-- img product -->
+            <!-- **************************** -->
+    <div class="container">
+   <h3 style="color: white;" class="title"> Productos  </h3>
+<!-- img product containe-->
    <div class="products-container">
-
-      <?php 
-
-           for ($i=0; $i <=20 ; $i++) { 
-       ?>
-<div class="product" data-name="p-1">
-         <img src="images/c.png" alt="">
-         <h3>strawberries</h3>
-         <div class="price">$2.00</div>
-      </div>
-
-    <?php } ?>
-
+    <?php 
+         $consult_Product = mysqli_query($connect, "SELECT * FROM productos");
+         $data_Product =mysqli_num_rows($consult_Product);
+         if($data_Product > 0){
+          while  ($fila = mysqli_fetch_array($consult_Product)){?>
+        <div class="product">
+         <img src="<?php echo $fila['Imagen_Producto']; ?>" alt="">
+         <h3><?php echo $fila['Nombre_Producto']; ?></h3>
+         <div class="price"><?php echo $fila['Precio_producto']; ?>
+         </div>
+         <div >
+             <?php $p = $fila['Id_Producto']; echo "<div onclick='comprar($p);'><button class='p btn btn-info' data-name='p-1'>Comprar</button></div>"; ?>
+         </div>
+        </div>
+    <?php                 
+            }
+         }
+    ?>
    </div>
-   <!-- end img product -->
-
-
+   <!-- end img product container -->
 </div>
+<!-- ************************************************88 -->
 
- <?php 
-  for ($i=0; $i <=20 ; $i++) { 
- ?>
 <div class="products-preview">
-
    <div class="preview" data-target="p-1">
- 
       <i class="fa fa-times"></i>
-      <img src="images/c.png" alt="">
-      <h3>organic strawberries</h3>
+      <div id="Imagen_Producto_Modal"> 
+      </div>
+      <h3 id="Nombre_Producto_Modal"></h3>
       <div class="stars">
          <i class="fa fa-star"></i>
          <i class="fa fa-star"></i>
@@ -194,17 +197,18 @@
          <i class="fa fa-star-half-alt"></i>
          <span>( 250 )</span>
       </div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, dolorem.</p>
-      <div class="price">$2.00</div>
+      <p><input type="" name=""></p>
+      <div class="price">precio</div>
       <div class="buttons">
-         <a href="#" class="buy">buy now</a>
-         <a href="#" class="cart">add to cart</a>
+         <a href="#" class="buy">Cancelar</a>
+         <a href="#" class="cart">Comprar</a>
       </div>
    </div>
 </div>
- <?php } ?>
+
         </div>
     </div>
+    <!-- ******products gallery -->
 </div>
 </div>
 </div>
@@ -299,4 +303,20 @@
                 /*optional stuff to do after success */
             });
         })
+
+
+
+        function comprar(id){
+
+            $.post(
+                'framentsPhp/ConsultarProductoXID.php',
+                {id:id},
+                function(product){
+                    var dataPhp = JSON.parse(product);
+                    $('#Nombre_Producto_Modal').html(dataPhp.Nombre_Producto);
+                     $('#Imagen_Producto_Modal').html("<img src="+dataPhp.Imagen_Producto+" alt='hola mundo'>");
+                     $('.price').html(dataPhp.Precio_producto);
+                 }
+                );
+        }
     </script>
