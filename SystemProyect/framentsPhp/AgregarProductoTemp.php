@@ -1,4 +1,6 @@
 <?php 
+session_start();
+$Id_User = $_SESSION['Id_User'];
 require("../../php/Conexion.php");
 if(isset($_POST['idProductoTemp'])){
 
@@ -12,7 +14,7 @@ if(isset($_POST['idProductoTemp'])){
 
 	$precioPNew = $result * $precioP;
 
-	$insert = mysqli_query($connect, "INSERT INTO venta_temporal (`Id_venta_Temp`, `New_Cantidad_Temp`, `Precio_Final`, `Id_Producto`) VALUES (NULL, '$result', '$precioPNew', '$idProducto')");
+	$insert = mysqli_query($connect, "INSERT INTO venta_temporal (`Id_venta_Temp`, `New_Cantidad_Temp`, `Precio_Final`, `Id_Producto`, `Id_User`) VALUES (NULL, '$result', '$precioPNew', '$idProducto', '$Id_User')");
 
 }
  ?>
