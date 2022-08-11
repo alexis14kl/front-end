@@ -212,7 +212,7 @@ tr:nth-child(even){background-color: #f2f2f2}
         <td><?php echo $fila_Producto_Temp['Nombre_Categoria']; ?></td>
         <td><?php echo $fila_Producto_Temp['New_Cantidad_Temp']; ?></td>
         <td><?php echo $fila_Producto_Temp['Precio_Final']; ?></td>
-        <td onclick="deleteProductTemp();"><i style="color: red; text-align: center;" class="fa fa-trash" aria-hidden="true"></i></td>
+        <td onclick="deleteProductTemp(<?php echo $fila_Producto_Temp['Id_venta_Temp'];  ?>);"><i style="color: red; text-align: center;" class="fa fa-trash" aria-hidden="true"></i></td>
       </tr>
   <?php             
            }
@@ -333,15 +333,46 @@ tr:nth-child(even){background-color: #f2f2f2}
       </script>
 
 </body>
-
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </html>
 
 <script>
     function salir(){
         window.location = "salir.php";
     }
-    function deleteProductTemp(){
-            $(".table").load(window.location.href + " .table" );
+function deleteProductTemp(id){
+        $.post(
+            'http://localhost:8080/deleteProductTemp',
+            {id:id},
+             msgDataDeleteProductTemp()
+            )
+    }
+    function msgDataDeleteProductTemp(){
+        Swal.fire(
+      {
+      html: '<p style="color:red;">Producto eliminado <i class="fa fa-envelope" aria-hidden="true"></i></p>',
+      backdrop: true,
+      maxlength: 1,
+      toast: true,//alert mas peque
+      popup: 'swal2-show',
+  backdrop: 'swal2-backdrop-show',
+  icon: 'swal2-icon-show',
+  confirmButton: false,
+  cancelButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+      position: 'top-end',didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    $(".table").load(window.location.href + " .table" );
             $('#containerProductTemp').load();
+            var 
+  }});
     }
 </script>
+
+
+
+
