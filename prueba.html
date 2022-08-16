@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>prueba</title>
+	<link rel="stylesheet" href="">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<h1>hello world</h1>
+
+	<script>
+		$(document).ready(function(){
+var json = [{"Name_User":"yilson","edad":"22"}];
+
+
+$.ajax({
+        type: "POST",
+        url : 'http://localhost:8080/apiRest',
+        data : JSON.stringify(json),
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
+        success : function(resp){
+            console.log(resp);
+        },
+        error : function(resp){
+            console.log(resp);
+        }
+    });
+	
+		});
+
+
+
+	</script>
+	
+</body>
+</html>
